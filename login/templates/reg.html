@@ -1,0 +1,96 @@
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="login-reg-panel">
+		<div class="login-info-box">
+			<h2>Have an account?</h2>
+			<p>Please log in!</p>
+			<label id="label-register" for="log-reg-show">Login</label>
+			<input type="radio" name="active-log-panel" id="log-reg-show" checked="checked" onclick="window.location='/login';" >
+		</div>
+
+		<div class="register-info-box">
+			<h2>Don't have an account?</h2>
+			<p>Please register to have access!</p>
+			<label id="label-login" for="log-login-show">Register</label>
+			<input type="radio" name="active-log-panel" id="log-login-show"  >
+		</div>
+
+		<div class="white-panel">
+			<div class="login-show">
+				<h2>LOGIN</h2>
+                <form>
+                    <input type="text" placeholder="Email">
+				    <input type="password" placeholder="Password">
+				    <input type="button" value="Login">
+				<a href="">Forgot password?</a>
+                </form>
+
+			</div>
+			<div class="register-show">
+				<h2>REGISTER</h2>
+                <form method="post" action="">
+                    {% csrf_token %}
+
+                    {% for hidden_field in form.hidden_fields %}
+                        {{ hidden_field }}
+                    {% endfor %}
+
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {% for error in form.non_field_errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    {% for field in form.visible_fields %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+
+                        {% if form.is_bound %}
+                            {% if field.errors %}
+                                {% render_field field class="form-control is-invalid" %}
+                                {% for error in field.errors %}
+                                    <div class="invalid-feedback">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field field class="form-control is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field field class="form-control" %}
+                        {% endif %}
+
+                        {% if field.help_text %}
+                            <small class="form-text text-muted">{{ field.help_text }}</small>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+
+                    <button type="submit"  class="btn btn-primary">Register</button>
+
+                </form>
+
+			</div>
+		</div>
+	</div>
+<script src="{% static 'reg.js' %}"></script>
+
+
+</body>
+</html>
