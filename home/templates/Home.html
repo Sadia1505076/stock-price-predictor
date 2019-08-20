@@ -52,31 +52,26 @@
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">Trade Code</th>
+                    <th scope="col">Company Name</th>
+                    <th scope="col">Authorized Capital</th>
+                    <th scope="col">Paid Up Capital</th>
+                    <th scope="col">Outstanding Share Number</th>
+                    <th scope="col">Sector</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                {% for company in companies %}
+                    <tr>
+                    <th scope="row">{{ company.trade_code }}</th>
+                    <td>{{ company.company_name }}</td>
+                    <td>{{ company.authorized_capital }}</td>
+                    <td>{{ company.paid_up_capital }}</td>
+                    <td>{{ company.outstanding_share_number }}</td>
+                    <td>{{ company.sector}}</td>
+                    </tr>
+                {% endfor %}
+
                 </tbody>
             </table>
         </div>

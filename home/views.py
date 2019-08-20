@@ -5,6 +5,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import redirect, render, get_object_or_404
 from login.models import User
 from .forms import EditProfileForm
+from .models import Company
 
 
 @login_required()
@@ -28,9 +29,15 @@ def change_password(request):
 @login_required()
 def home_view(request):
     username = None
+    companies = None
     if request.user.is_authenticated:
         username = request.user.username
-    return render(request, 'Home.html', {'username': username})
+        companies = Company.objects.all()
+    context = {
+        'username': username,
+        'companies': companies
+    }
+    return render(request, 'Home.html', context)
 
 
 @login_required()
