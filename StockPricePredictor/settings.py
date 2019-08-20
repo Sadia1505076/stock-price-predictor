@@ -83,8 +83,8 @@ WSGI_APPLICATION = 'StockPricePredictor.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'NAME': 'spp',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'stock_price_prediction',
         'USER': 'newuser',
         'PASSWORD': 'newuserS201505076;',
         'HOST': 'localhost',
@@ -131,3 +131,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+# Custom Django auth settings
+
+AUTH_USER_MODEL = 'login.User'
+
+LOGIN_URL = 'login'
+
+LOGOUT_URL = 'logout'
+
+LOGIN_REDIRECT_URL = 'home'
+
+LOGOUT_REDIRECT_URL = 'login'
+
+AUTH_PROFILE_MODULE = "login.User"

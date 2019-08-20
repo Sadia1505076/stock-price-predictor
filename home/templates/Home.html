@@ -44,7 +44,9 @@
             </a>
         </div>
     </div> <br><br>
-
+    <div style="padding: 10%">
+        <div id="container"></div>
+    </div>
     <div class="container">
         <div class="table-responsive-xl">
             <table class="table">
@@ -79,5 +81,30 @@
             </table>
         </div>
     </div>
+
+    <script src="https://code.highcharts.com/highcharts.src.js"></script>
+     <script>
+    Highcharts.chart('container', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Historic price Prediction by Company'
+        },
+        xAxis: {
+            categories: ['Beximco', 'ACI', 'Holcim', 'GP', 'BTCL']
+        },
+        series: [{
+            name: 'Year 1800',
+            data: [107, 31, 635, 203, 2]
+        }, {
+            name: 'Year 1900',
+            data: [133, 156, 947, 408, 6]
+        }, {
+            name: 'Year 2012',
+            data: [1052, 954, 4250, 740, 38]
+        }]
+    });
+  </script>
 
 {% endblock %}

@@ -15,32 +15,16 @@
 </head>
 <body>
 <div class="login-reg-panel">
-		<div class="login-info-box">
+        <div class="register-info-box">
 			<h2>Have an account?</h2>
-			<p>Please log in!</p>
-			<label id="label-register" for="log-reg-show">Login</label>
-			<input type="radio" name="active-log-panel" id="log-reg-show" checked="checked" onclick="window.location='/login';" >
-		</div>
+			<p>Login to have access!</p>
 
-		<div class="register-info-box">
-			<h2>Don't have an account?</h2>
-			<p>Please register to have access!</p>
-			<label id="label-login" for="log-login-show">Register</label>
-			<input type="radio" name="active-log-panel" id="log-login-show"  >
+            <form action="/login">
+                    <input class="btn btn-warning" type="submit" value="login" name="active-log-panel" id="log-login-show"/>
+            </form>
 		</div>
-
-		<div class="white-panel">
+		<div class="white-panel" id="white-panel-reg">
 			<div class="login-show">
-				<h2>LOGIN</h2>
-                <form>
-                    <input type="text" placeholder="Email">
-				    <input type="password" placeholder="Password">
-				    <input type="button" value="Login">
-				<a href="">Forgot password?</a>
-                </form>
-
-			</div>
-			<div class="register-show">
 				<h2>REGISTER</h2>
                 <form method="post" action="">
                     {% csrf_token %}
@@ -83,13 +67,11 @@
                     {% endfor %}
 
                     <button type="submit"  class="btn btn-primary">Register</button>
-
                 </form>
-
-			</div>
 		</div>
 	</div>
-<script src="{% static 'reg.js' %}"></script>
+</div>
+<script src="{% static 'scripts.js' %}"></script>
 
 
 </body>

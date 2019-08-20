@@ -7,6 +7,3 @@ def max_length_validator(maxlength, field):
         if len(value) > maxlength:
             raise ValidationError(_('%s is too long!!' % field))
     return inner_validate_fn
-
-
-

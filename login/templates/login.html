@@ -15,21 +15,15 @@
 </head>
 <body>
 <div class="login-reg-panel">
-		<div class="login-info-box">
-			<h2>Have an account?</h2>
-			<p>Please log in!</p>
-			<label id="label-register" for="log-reg-show">Login</label>
-			<input type="radio" name="active-log-panel" id="log-reg-show"  checked="checked" onclick="window.location='';">
-		</div>
-
-		<div class="register-info-box">
+        <div class="register-info-box">
 			<h2>Don't have an account?</h2>
 			<p>Please register to have access!</p>
-			<label id="label-login" for="log-login-show">Register</label>
-			<input type="radio" name="active-log-panel" id="log-login-show" onclick="window.location='reg';">
-		</div>
 
-		<div class="white-panel">
+            <form action="reg">
+                    <input class="btn btn-warning" type="submit" value="Register" name="active-log-panel" id="log-login-show"/>
+            </form>
+		</div>
+		<div class="white-panel" id="white-panel-login">
 			<div class="login-show">
 				<h2>LOGIN</h2>
                 <form method="post" action="">
@@ -75,43 +69,9 @@
                     <button type="submit"  class="btn btn-primary">Login</button>
                     <a href="">Forgot password?</a>
                 </form>
-
-			</div>
-			<div class="register-show">
-				<h2>REGISTER</h2>
-                <form method="post" action="">{% csrf_token %}
-                    <div>
-                        <label>user name:</label>
-                        <input type="text">
-
-                    </div>
-                    <div>
-                        <label>phone number:</label>
-                        <input type="text">
-
-                    </div>
-                    <div>
-                        <label>email id:</label>
-                        <input type="email">
-
-                    </div>
-                    <div>
-                        <label>password:</label>
-                        <input type="password">
-
-                    </div>
-                    <div>
-                        <label>confirm password:</label>
-                        <input type="password">
-
-                    </div>
-                    <button type="submit"  class="btn btn-primary">Register</button>
-
-                </form>
-
-			</div>
 		</div>
 	</div>
+</div>
 <script src="{% static 'scripts.js' %}"></script>
 
 

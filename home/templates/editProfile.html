@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+    <div class="container">
+    <div class="row">
+        <div class="col-xs-3 col-sm-4 col-lg-5">
+            <label ></label>
+        </div>
+        <div class="col-xs-9 col-sm-8 col-lg-7">
+            <label></label>
+        </div>
+    </div>
+	<div class="row">
+{#		<div class="col-md-3 ">#}
+{#		     <div class="list-group ">#}
+{#                <h3>#}
+{#                     Current settings#}
+{#                 </h3>#}
+{#                 <span>#}
+{#                     <b>User name:</b><span>{{ username }}</span>#}
+{#                 </span>#}
+{#                 <span>#}
+{#                     <b>First name:</b><span>{{ first_name }}</span>#}
+{#                 </span>#}
+{#                 <span>#}
+{#                     <b>Last name:</b><span>{{ last_name }}</span>#}
+{#                 </span>#}
+{#                 <span>#}
+{#                     <b>Email id:</b><span>{{ email }}</span>#}
+{#                 </span>#}
+{#                 <span>#}
+{#                     <b>Phone Number:</b><span>{{ phone_number }}</span>#}
+{#                 </span>#}
+{##}
+{##}
+{#            </div>#}
+{#		</div>#}
+		<div class="col-md-9">
+		    <div class="card">
+		        <div class="card-body">
+		            <div class="row">
+		                <div class="col-md-12">
+		                    <h4>Your Profile</h4>
+		                    <hr>
+		                </div>
+		            </div>
+		            <div class="row">
+		                <div class="col-md-12">
+		                    <form method="post" action="">
+                                {% csrf_token %}
+
+                               <div class="form-group row">
+                                   {% for hidden_field in form.hidden_fields %}
+                                        {{ hidden_field }}
+                                    {% endfor %}
+
+                                   {% if form.non_field_errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                        {% for error in form.non_field_errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                        </div>
+                                   {% endif %}
+                               </div>
+                                {% for field in form.visible_fields %}
+                                    <div class="form-group">
+                                        {{ field.label_tag }}
+
+                                        {% if form.is_bound %}
+                                            {% if field.errors %}
+                                               {% render_field field class="form-control is-invalid" %}
+                                                {% for error in field.errors %}
+                                                    <div class="invalid-feedback">
+                                                    {{ error }}
+                                                    </div>
+                                                {% endfor %}
+                                            {% else %}
+                                               {% render_field field class="form-control is-valid" %}
+                                           {% endif %}
+                                        {% else %}
+                                           {% render_field field class="form-control" %}
+                                        {% endif %}
+
+                                        {% if field.help_text %}
+                                            <small class="form-text text-muted">{{ field.help_text }}</small>
+                                        {% endif %}
+                                        </div>
+                                {% endfor %}
+                                <button type="submit"  class="btn btn-primary">Update</button>
+                            </form>
+		                </div>
+		            </div>
+
+		        </div>
+		    </div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
