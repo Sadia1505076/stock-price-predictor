@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'login.apps.LoginConfig',
 
     'widget_tweaks',
+    'django_tables2',
+    'rest_framework',
+
 
 ]
 

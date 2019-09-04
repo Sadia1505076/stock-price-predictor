@@ -17,15 +17,16 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from django.conf.urls import url
+from home.views import not_found
 
+from home import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', include('home.urls')),
+    url(r'^home/', include(('home.urls', 'home'), namespace='home')),
+    # url('home/', include('home.urls', namespace='home')),
     path('login/', include('login.urls')),
     url(r'^login/$', auth_views.LoginView.as_view(redirect_authenticated_user=True, template_name="login.html"), name="login"),
     path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),
-
-
-
+    path('search_company/', views.company_details_view),
 ]

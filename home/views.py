@@ -3,9 +3,12 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import redirect, render, get_object_or_404
+from django_tables2 import RequestConfig
+
 from login.models import User
 from .forms import EditProfileForm
-from .models import Company
+from .models import Company, DSEHistory, ShareHistory, SharePrediction
+from .tables import CompanyTable, ShareHistoryTable, SharePredictionTable
 
 
 @login_required()
@@ -29,13 +32,27 @@ def change_password(request):
 @login_required()
 def home_view(request):
     username = None
-    companies = None
+    table = None
+    dates = []
+
+    dsex_index = []
     if request.user.is_authenticated:
         username = request.user.username
-        companies = Company.objects.all()
+        table = CompanyTable(Company.objects.all())
+        RequestConfig(request, paginate={'per_page': 15}).configure(table)
+
+        all_histories = DSEHistory.objects.raw('SELECT * FROM HOME_DSEHISTORY ORDER BY date DESC LIMIT 100')
+
+        for p in reversed(all_histories):
+            # print(p.date)
+            dates.append(p.date.date())
+            dsex_index.append(p.dsex_index)
+
     context = {
         'username': username,
-        'companies': companies
+        'table': table,
+        'dates': dates,
+        'indices': dsex_index,
     }
     return render(request, 'Home.html', context)
 
@@ -84,3 +101,129 @@ def profile_view(request):
         }
 
         return render(request, 'userProfile.html', context)
+
+
+@login_required()
+def company_details_view(request, *args, **kwargs):
+    dates = []
+    price = []
+    point_color = []
+    bg_color = []
+    code = kwargs.get("trade_code")
+    if request.method == 'GET' and code is None:
+        print("inside get")
+        search_query = request.GET.get('search_box', None)
+
+        code = search_query.upper()
+
+        company = Company.objects.raw('SELECT * FROM HOME_COMPANY WHERE TRADE_CODE = %s', [code])
+
+        all_histories = SharePrediction.objects.raw(
+            'SELECT * FROM HOME_SHAREPREDICTION  WHERE TRADE_CODE = %s ORDER BY date ASC', [code])
+
+        # share_history = ShareHistory.objects.raw(
+        #     'SELECT * FROM HOME_SHAREHISTORY ORDER BY date ASC')
+
+        count = 1
+        for p in all_histories:
+            if count <= 30:
+                point_color.append('red')
+                bg_color.append('255, 99, 132, 0.2')
+            else:
+                point_color.append('green')
+                bg_color.append('54, 162, 235, 0.2')
+            dates.append(p.date.date())
+            price.append(p.future_price)
+            count = count+1
+
+        #
+        # for p in share_history:
+        #     dates.append(p.date)
+        #     price.append(p.closing_price)
+        #     color.append('green')
+
+        table = SharePredictionTable(all_histories)
+        RequestConfig(request, paginate={'per_page': 5}).configure(table)
+        if company:
+            for c in company:
+                cname = c.company_name
+                acapital = c.authorized_capital
+                pcapital = c.paid_up_capital
+                snumber = c.outstanding_share_number
+                sector = c.sector
+            context = {
+                'username': request.user.username,
+                'trade_code': code,
+                'company_name': cname,
+                'authorized_capital': acapital,
+                'paid_up_capital': pcapital,
+                'outstanding_share_number': snumber,
+                'sector': sector,
+                'dates': dates,
+                'prices': price,
+                'table': table,
+                'colors': point_color,
+                'bgcolor': bg_color,
+
+            }
+            return render(request, 'companyDetails.html', context)
+        else:
+            return render(request, '404_not_found.html')
+    else:
+        print("inside k")
+
+        company = Company.objects.raw('SELECT * FROM HOME_COMPANY WHERE TRADE_CODE = %s', [code])
+
+        all_histories = ShareHistory.objects.raw(
+            'SELECT * FROM HOME_SHAREPREDICTION  WHERE TRADE_CODE = %s ORDER BY date ASC', [code])
+
+        # share_history = ShareHistory.objects.raw(
+        #     'SELECT * FROM HOME_SHAREHISTORY ORDER BY date ASC')
+
+        count = 1
+        for p in all_histories:
+            if count <= 30:
+                point_color.append('red')
+                bg_color.append('255, 99, 132, 0.2')
+            else:
+                point_color.append('green')
+                bg_color.append('54, 162, 235, 0.2')
+            dates.append(p.date.date())
+            price.append(p.future_price)
+            count = count + 1
+
+        # for p in share_history:
+        #     dates.append(p.date)
+        #     price.append(p.closing_price)
+        #     color.append('green')
+
+        table = SharePredictionTable(all_histories)
+        RequestConfig(request, paginate={'per_page': 5}).configure(table)
+
+        for c in company:
+            cname = c.company_name
+            acapital = c.authorized_capital
+            pcapital = c.paid_up_capital
+            snumber = c.outstanding_share_number
+            sector = c.sector
+        context = {
+            'username': request.user.username,
+            'trade_code': code,
+            'company_name': cname,
+            'authorized_capital': acapital,
+            'paid_up_capital': pcapital,
+            'outstanding_share_number': snumber,
+            'sector': sector,
+            'dates': dates,
+            'prices': price,
+            'table': table,
+            'colors': point_color,
+            'bgcolor': bg_color,
+
+        }
+        return render(request, 'companyDetails.html', context)
+
+
+def not_found(request):
+    return render(request, '404_not_found.html')
+
