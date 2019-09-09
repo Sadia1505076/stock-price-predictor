@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="119faa56-8b0b-48ce-ae21-79485b97811d" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="96">
+              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+              <folding>
+                <element signature="n#style#0;n#span#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#1;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/StockPricePredictor/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="161">
+              <caret line="28" column="68" selection-start-line="28" selection-start-column="68" selection-end-line="28" selection-end-column="68" />
+              <folding>
+                <element signature="e#643#675#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/login/templates/login.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="275">
+              <caret line="11" selection-start-line="11" selection-end-line="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/login/static/styles_login.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="129" column="1" selection-end-line="129" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/login/templates/reg.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="275">
+              <caret line="11" selection-start-line="11" selection-end-line="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/StockPricePredictor/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="111">
+              <caret line="144" column="28" lean-forward="true" selection-start-line="144" selection-start-column="28" selection-end-line="144" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="Python Script" />
+        <option value="HTML File" />
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>login-show</find>
+      <find>log-login-show</find>
+      <find>active-log-panel</find>
+      <find>login-reg-panel</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/home/static/fusioncharts.py" />
+        <option value="$PROJECT_DIR$/models.py" />
+        <option value="$PROJECT_DIR$/login/template/login.html" />
+        <option value="$PROJECT_DIR$/login/templates/styles.css" />
+        <option value="$PROJECT_DIR$/login/static/reg.js" />
+        <option value="$PROJECT_DIR$/manage.py" />
+        <option value="$PROJECT_DIR$/login/migrations/0001_initial.py" />
+        <option value="$PROJECT_DIR$/login/validators.py" />
+        <option value="$PROJECT_DIR$/home/validators.py" />
+        <option value="$PROJECT_DIR$/login/forms.py" />
+        <option value="$PROJECT_DIR$/home/templates/update.html" />
+        <option value="$PROJECT_DIR$/home/templates/profile2.html" />
+        <option value="$PROJECT_DIR$/home/templates/profile.html" />
+        <option value="$PROJECT_DIR$/login/views.py" />
+        <option value="$PROJECT_DIR$/login/urls.py" />
+        <option value="$PROJECT_DIR$/login/admin.py" />
+        <option value="$PROJECT_DIR$/home/forms.py" />
+        <option value="$PROJECT_DIR$/login/models.py" />
+        <option value="$PROJECT_DIR$/home/static/styles.css" />
+        <option value="$PROJECT_DIR$/home/static/styleforcompany.css" />
+        <option value="$PROJECT_DIR$/home/templates/userProfile.html" />
+        <option value="$PROJECT_DIR$/home/templates/editProfile.html" />
+        <option value="$PROJECT_DIR$/home/static/stylefor404.css" />
+        <option value="$PROJECT_DIR$/home/urls.py" />
+        <option value="$PROJECT_DIR$/home/models.py" />
+        <option value="$PROJECT_DIR$/home/tables.py" />
+        <option value="$PROJECT_DIR$/home/views.py" />
+        <option value="$PROJECT_DIR$/login/static/scripts.js" />
+        <option value="$PROJECT_DIR$/login/static/styles.css" />
+        <option value="$PROJECT_DIR$/home/templates/companyDetails.html" />
+        <option value="$PROJECT_DIR$/templates/base.html" />
+        <option value="$PROJECT_DIR$/home/templates/404_not_found.html" />
+        <option value="$PROJECT_DIR$/home/templates/changePassword.html" />
+        <option value="$PROJECT_DIR$/home/templates/Home.html" />
+        <option value="$PROJECT_DIR$/StockPricePredictor/urls.py" />
+        <option value="$PROJECT_DIR$/StockPricePredictor/settings.py" />
+        <option value="$PROJECT_DIR$/login/templates/reg.html" />
+        <option value="$PROJECT_DIR$/login/templates/login.html" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="908" />
+    <option name="height" value="730" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="StockPricePredictor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="StockPricePredictor" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="StockPricePredictor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="StockPricePredictor" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="StockPricePredictor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="StockPricePredictor" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="StockPricePredictor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="StockPricePredictor" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="StockPricePredictor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="StockPricePredictor" type="462c0819:PsiDirectoryNode" />
+              <item name="login" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="StockPricePredictor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="StockPricePredictor" type="462c0819:PsiDirectoryNode" />
+              <item name="login" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="StockPricePredictor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="StockPricePredictor" type="462c0819:PsiDirectoryNode" />
+              <item name="login" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="StockPricePredictor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="StockPricePredictor" type="462c0819:PsiDirectoryNode" />
+              <item name="StockPricePredictor" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="StockPricePredictor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="StockPricePredictor" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Jupyter" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../old version/stock-price-predictor-66e098b6115062b32a9252325761df93981607af" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\4-1\software development\StockPricePredictor\login\templates" />
+      <recent name="F:\4-1\software development\StockPricePredictor\login\templates\registraton" />
+      <recent name="F:\4-1\software development\StockPricePredictor\login\static" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="StockPricePredictor" type="Python.DjangoServer" factoryName="Django server">
+      <module name="StockPricePredictor" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="119faa56-8b0b-48ce-ae21-79485b97811d" name="Default Changelist" comment="" />
+      <created>1559321942784</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1559321942784</updated>
+      <workItem from="1559321960912" duration="8191000" />
+      <workItem from="1559533723546" duration="4964000" />
+      <workItem from="1560233225492" duration="1949000" />
+      <workItem from="1560634090755" duration="2723000" />
+      <workItem from="1561196444876" duration="905000" />
+      <workItem from="1561197460830" duration="4096000" />
+      <workItem from="1561217348533" duration="3330000" />
+      <workItem from="1561224098562" duration="5461000" />
+      <workItem from="1561616939773" duration="17754000" />
+      <workItem from="1561831252572" duration="3958000" />
+      <workItem from="1561859118695" duration="12351000" />
+      <workItem from="1561909838710" duration="2870000" />
+      <workItem from="1561917672845" duration="5554000" />
+      <workItem from="1561973992739" duration="7713000" />
+      <workItem from="1562036563825" duration="14929000" />
+      <workItem from="1562062190525" duration="4565000" />
+      <workItem from="1562072223926" duration="649000" />
+      <workItem from="1562073073114" duration="12161000" />
+      <workItem from="1562123608626" duration="8280000" />
+      <workItem from="1562132529209" duration="4891000" />
+      <workItem from="1562393940461" duration="946000" />
+      <workItem from="1562572326092" duration="401000" />
+      <workItem from="1562749087276" duration="2297000" />
+      <workItem from="1563264849090" duration="61000" />
+      <workItem from="1564278983242" duration="588000" />
+      <workItem from="1564306551516" duration="64240000" />
+      <workItem from="1564550734188" duration="12684000" />
+      <workItem from="1566113397765" duration="28954000" />
+      <workItem from="1566292700381" duration="8416000" />
+      <workItem from="1566745005452" duration="37343000" />
+      <workItem from="1566875489285" duration="30836000" />
+      <workItem from="1567339637103" duration="12641000" />
+      <workItem from="1567578404336" duration="1501000" />
+      <workItem from="1567581151574" duration="8731000" />
+      <workItem from="1567983207400" duration="7888000" />
+      <workItem from="1567996368465" duration="141000" />
+      <workItem from="1568005507252" duration="2650000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="347612000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15204236" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32872504" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.38556066" />
+      <window_info anchor="bottom" id="Python Console" order="12" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/home/static/fusioncharts.py" />
+    <entry file="file://$PROJECT_DIR$/home/migrations/0002_delete_user.py" />
+    <entry file="file://$PROJECT_DIR$/home/migrations/0003_user.py" />
+    <entry file="file://$PROJECT_DIR$/home/migrations/0006_delete_user.py" />
+    <entry file="file://$PROJECT_DIR$/login/migrations/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/home/migrations/0001_initial.py" />
+    <entry file="file://$PROJECT_DIR$/home/migrations/0003_delete_thisuser.py" />
+    <entry file="file://$PROJECT_DIR$/models.py" />
+    <entry file="file://$PROJECT_DIR$/home/apps.py" />
+    <entry file="file://$PROJECT_DIR$/home/migrations/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/home/admin.py" />
+    <entry file="file://$PROJECT_DIR$/login/migrations/0003_auto_20190630_1801.py" />
+    <entry file="file://$PROJECT_DIR$/login/static/reg.js" />
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.ipynb" />
+    <entry file="file://$PROJECT_DIR$/login/migrations/0006_auto_20190729_1249.py" />
+    <entry file="file://$PROJECT_DIR$/manage.py" />
+    <entry file="file://$PROJECT_DIR$/login/validators.py" />
+    <entry file="file://$PROJECT_DIR$/home/validators.py" />
+    <entry file="file://$PROJECT_DIR$/login/migrations/0001_initial.py" />
+    <entry file="file://$PROJECT_DIR$/home/templates/profile2.html" />
+    <entry file="file://$PROJECT_DIR$/home/templates/update.html" />
+    <entry file="file://$PROJECT_DIR$/login/forms.py" />
+    <entry file="file://$PROJECT_DIR$/login/apps.py" />
+    <entry file="file://$PROJECT_DIR$/login/admin.py" />
+    <entry file="file://$PROJECT_DIR$/StockPricePredictor/wsgi.py" />
+    <entry file="file://$PROJECT_DIR$/home/forms.py" />
+    <entry file="file://$PROJECT_DIR$/login/urls.py" />
+    <entry file="file://$PROJECT_DIR$/login/views.py" />
+    <entry file="file://$PROJECT_DIR$/home/migrations/0005_auto_20190730_1312.py" />
+    <entry file="file://$PROJECT_DIR$/login/models.py" />
+    <entry file="file://$PROJECT_DIR$/home/static/styleforcompany.css" />
+    <entry file="file://$PROJECT_DIR$/home/static/stylefor404.css" />
+    <entry file="file://$PROJECT_DIR$/home/urls.py" />
+    <entry file="file://$PROJECT_DIR$/home/views.py" />
+    <entry file="file://$PROJECT_DIR$/home/tables.py" />
+    <entry file="file://$PROJECT_DIR$/home/models.py" />
+    <entry file="file://$PROJECT_DIR$/login/static/scripts.js" />
+    <entry file="file://$PROJECT_DIR$/home/templates/editProfile.html" />
+    <entry file="file://$PROJECT_DIR$/home/templates/userProfile.html" />
+    <entry file="file://$PROJECT_DIR$/home/templates/companyDetails.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home/templates/changePassword.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="75" column="14" selection-start-line="75" selection-start-column="14" selection-end-line="75" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home/templates/404_not_found.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="29" column="14" selection-start-line="29" selection-start-column="14" selection-end-line="29" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home/templates/Home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="88" column="14" selection-start-line="88" selection-start-column="14" selection-end-line="88" selection-end-column="14" />
+          <folding>
+            <element signature="e#3176#3196#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#1;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StockPricePredictor/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="111">
+          <caret line="144" column="28" lean-forward="true" selection-start-line="144" selection-start-column="28" selection-end-line="144" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StockPricePredictor/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="28" column="68" selection-start-line="28" selection-start-column="68" selection-end-line="28" selection-end-column="68" />
+          <folding>
+            <element signature="e#643#675#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/login/static/styles_login.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="129" column="1" selection-end-line="129" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home/static/styles.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/login/templates/reg.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/login/templates/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

@@ -1,0 +1,26 @@
+table {
+    border: 1px solid black;
+    margin-left: 20px;
+    margin-right: 20px;
+
+}
+th {
+    background-color: black;
+    color: white;
+}
+tr:hover {
+   background: lightgreen;
+}
+td a {
+   /*display: block;*/
+   /*border: 1px solid black;*/
+   /*padding: 16px;*/
+    color: #242424;
+}
+.pagination a {
+  border-radius: 5px;
+}
+
+.pagination a.active {
+  border-radius: 5px;
+}

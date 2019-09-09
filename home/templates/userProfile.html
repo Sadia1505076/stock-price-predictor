@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+    <div class="container">
+    <div class="row">
+        <div class="col-xs-3 col-sm-4 col-lg-5">
+            <label ></label>
+        </div>
+        <div class="col-xs-9 col-sm-8 col-lg-7">
+            <label></label>
+        </div>
+    </div>
+    <div id="message_container">
+        {% if messages %}
+            <ul class="messages" style="list-style-type:none">
+                {% for message in messages %}
+                    <li{% if message.tags %}  class="{{ message.tags }}"{% endif %} style="color:#228B22"><i><h4>{{ message }}</h4></i></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+	<div class="row">
+		<div class="col-md-9">
+		    <div class="card">
+		        <div class="card-body">
+		            <div class="row">
+		                <div class="col-md-12">
+		                    <h4>Your Profile</h4>
+		                    <hr>
+		                </div>
+		            </div>
+		            <div class="row">
+		                <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-xs-3 col-sm-4 col-lg-5">
+                                    <label style="font-weight:bold;">User Name</label>
+                                </div>
+                                <div class="col-xs-9 col-sm-8 col-lg-7">
+                                    {{ username }}
+                                </div>
+                            </div>
+                            <hr />
+
+                            <div class="row">
+                                <div class="col-xs-3 col-sm-4 col-lg-5">
+                                    <label style="font-weight:bold;">First Name</label>
+                                </div>
+                                <div class="col-xs-9 col-sm-8 col-lg-7">
+                                    {{ first_name }}
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-xs-3 col-sm-4 col-lg-5">
+                                    <label style="font-weight:bold;">Last Name</label>
+                                </div>
+                                <div class="col-xs-9 col-sm-8 col-lg-7">
+                                    {{ last_name }}
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-xs-3 col-sm-4 col-lg-5">
+                                    <label style="font-weight:bold;">Email ID</label>
+                                </div>
+                                <div class="col-xs-9 col-sm-8 col-lg-7">
+                                    {{ email }}
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-xs-3 col-sm-4 col-lg-5">
+                                    <label style="font-weight:bold;">Phone Number</label>
+                                </div>
+                                <div class="col-xs-9 col-sm-8 col-lg-7">
+                                    {{ phone_number }}
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-xs-3 col-sm-4 col-lg-4">
+                                    <a class="btn btn-success my-2 my-sm-0" style="margin-left: 2%;" href="profile/edit">Edit Profile</a>
+                                </div>
+                                <div class="col-xs-9 col-sm-8 col-lg-8">
+                                    <a class="btn btn-success my-2 my-sm-0" style="margin-left: 2%;" href="profile/changePassword">Change Password</a>
+                                </div>
+
+                            </div>
+
+		                </div>
+		            </div>
+
+		        </div>
+		    </div>
+		</div>
+	</div>
+</div>
+<script>
+    var message_ele = document.getElementById("message_container");
+
+    setTimeout(function(){
+        message_ele.style.display = "none";
+    }, 3000);
+</script>
+{% endblock %}

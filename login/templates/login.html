@@ -1,0 +1,80 @@
+{% load widget_tweaks %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles_login.css' %}">
+    <meta charset="utf-8">
+    <title>login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="login-reg-panel">
+        <div class="register-info-box">
+			<h2>Don't have an account?</h2>
+			<p>Please register to have access!</p>
+
+            <form action="reg">
+                    <input class="btn btn-warning" type="submit" value="Register" name="active-log-panel" id="log-login-show"/>
+            </form>
+		</div>
+		<div class="white-panel" id="white-panel-login">
+			<div class="login-show">
+				<h2>LOGIN</h2>
+                <form method="post" action="">
+                    {% csrf_token %}
+
+                    {% for hidden_field in form.hidden_fields %}
+                        {{ hidden_field }}
+                    {% endfor %}
+
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {% for error in form.non_field_errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    {% for field in form.visible_fields %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+
+                        {% if form.is_bound %}
+                            {% if field.errors %}
+                                {% render_field field class="form-control is-invalid" %}
+                                {% for error in field.errors %}
+                                    <div class="invalid-feedback">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field field class="form-control is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field field class="form-control" %}
+                        {% endif %}
+
+                        {% if field.help_text %}
+                            <small class="form-text text-muted">{{ field.help_text }}</small>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+
+                    <button type="submit"  class="btn btn-primary">Login</button>
+                    <a href="">Forgot password?</a>
+                </form>
+		</div>
+	</div>
+</div>
+<script src="{% static 'scripts.js' %}"></script>
+
+
+</body>
+</html>
