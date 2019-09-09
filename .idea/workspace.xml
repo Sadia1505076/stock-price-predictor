@@ -42,7 +42,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/login/templates/login.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
+            <state relative-caret-position="200">
               <caret line="11" selection-start-line="11" selection-end-line="11" />
             </state>
           </provider>
@@ -313,12 +313,12 @@
       <workItem from="1567581151574" duration="8731000" />
       <workItem from="1567983207400" duration="7888000" />
       <workItem from="1567996368465" duration="141000" />
-      <workItem from="1568005507252" duration="3250000" />
+      <workItem from="1568005507252" duration="4484000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="348212000" />
+    <option name="totallyTimeSpent" value="349446000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
@@ -337,7 +337,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.3840246" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.4362519" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -468,7 +468,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/login/templates/login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
+        <state relative-caret-position="200">
           <caret line="11" selection-start-line="11" selection-end-line="11" />
         </state>
       </provider>
