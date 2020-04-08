@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load render_table from django_tables2 %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+
+<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+
+<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+<div style="margin-top: 40px">
+        <table id="myTable" class="table table-striped" style=" border: 1px solid black;" >
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for c in dse_pred %}
+            <tr style="color: black;background-color: #befcb8;border: 1px solid black;">
+                <td>{{ c.datedate}}</td>
+                <td>{{ c.future_index}}</td>
+
+            </tr>
+
+        {% endfor %}
+        {% for c in dse_history %}
+            <tr style="color: black;background-color:#fcbbb8;">
+                <td>{{ c.datedate}}</td>
+                <td>{{ c.dsex_index}}</td>
+
+            </tr>
+
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('#myTable').dataTable({
+        "ordering": false
+    });
+
+});
+</script>
+{% endblock %}

@@ -2,62 +2,242 @@
 {% load render_table from django_tables2 %}
 
 {% block content %}
+
     <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-{#    <div class="bd-example">#}
-{#        <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">#}
-{#            <ol class="carousel-indicators">#}
-{#                <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>#}
-{#                <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>#}
-{#                <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>#}
-{#            </ol>#}
-{#            <div class="carousel-inner">#}
-{#                <div class="carousel-item active">#}
-{#                    <img src="https://images.pexels.com/photos/1087727/pexels-photo-1087727.jpeg?cs=srgb&dl=bags-commerce-goods-1087727.jpg&fm=jpg"#}
-{#                         class="d-block w-100" alt="Max-width 100%" style="height:500px">#}
-{#                    <div class="carousel-caption d-none d-md-block">#}
-{#                        <h5>First slide label</h5>#}
-{#                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <div class="carousel-item">#}
-{#                    <img src="https://images.pexels.com/photos/775998/pexels-photo-775998.jpeg?cs=srgb&dl=bookcase-books-bookstore-775998.jpg&fm=jpg"#}
-{#                         class="d-block w-100" alt="Max-width 100%" style="height:500px">#}
-{#                    <div class="carousel-caption d-none d-md-block">#}
-{#                        <h5>Second slide label</h5>#}
-{#                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <div class="carousel-item">#}
-{#                    <img src="https://images.pexels.com/photos/159888/pexels-photo-159888.jpeg?cs=srgb&dl=blur-chart-data-159888.jpg&fm=jpg"#}
-{#                         class="d-block w-100" alt="Max-width 100%" style="height:500px">#}
-{#                    <div class="carousel-caption d-none d-md-block">#}
-{#                        <h5>Third slide label</h5>#}
-{#                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#            <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">#}
-{#                <span class="carousel-control-prev-icon" aria-hidden="true"></span>#}
-{#                <span class="sr-only">Previous</span>#}
-{#            </a>#}
-{#            <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">#}
-{#                <span class="carousel-control-next-icon" aria-hidden="true"></span>#}
-{#                <span class="sr-only">Next</span>#}
-{#            </a>#}
-{#        </div>#}
-{#    </div> <br><br>#}
-    <div style="padding: 10%">
-{#        <div id="container"></div>#}
-         <canvas id="myChart" width="1000" height="500"></canvas>
-    </div>
-    <div>
-    {% render_table table %}
+    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+
+
+    <link data-require="jqueryui@*" data-semver="1.10.0" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/css/smoothness/jquery-ui-1.10.0.custom.min.css" />
+    <script data-require="jqueryui@*" data-semver="1.10.0" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/jquery-ui.js"></script>
+
+
+    <style>
+        .bar{
+            background-color: #f2f2f1;width: 100%;height: 20px;margin-bottom: 10px;
+        }
+        .bar-inner{
+           background-color: #2ecc71;height: 100%;position: relative;
+        }
+        .bar-inner:after{
+            position: absolute;
+            right: 2%;
+            content: attr(data-percent);
+            line-height: 15px;
+            font-size: 13px;
+            color: #fff;
+        }
+        .card{
+            margin-right: 5px;width: 200px;height: 110px;
+            margin-left: 40px;
+            background-color: #f2f7f4;
+        }
+        .card-body{
+            padding: 0;
+        }
+        .card-body .explanation{
+            font-size: 11px;
+        }
+        .card-body h2{
+            color: #5eb854;
+        }
+        .vl {
+          border-left: 2px solid green;
+          height: 90px;
+          margin-top: 10px;
+
+        }
+        #myTable{
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        #myTable th{
+            background-color:black;
+            color: #f9f9f9;
+
+        }
+        #myTable tr:hover{
+            background: lightgreen;
+        }
+        .comp_name{
+            color: #1a1aff;
+        }
+    </style>
+    <div class="row" style="margin-top: 20px;background-color: #f2f7f4;margin-left: 20px;margin-right: 20px">
+        <div class="card border-0">
+            <div class="card-body">
+                <span class="explanation">Market index</span><br>
+                <h2>{{ last.dsex_index }}</h2>
+                <span class="explanation">From Last Day</span><br>
+            </div>
+        </div>
+        <div class="vl"></div>
+        <div class="card border-0">
+            <div class="card-body">
+                <span class="explanation">Total trade</span><br>
+                <h2>{{ last.total_trade }}</h2>
+                <span class="explanation">From Last Day</span><br>
+            </div>
+        </div>
+        <div class="vl"></div>
+        <div class="card border-0">
+            <div class="card-body">
+                <span class="explanation">Total volume</span><br>
+                <h2>{{ last.total_volume }}</h2>
+                <span class="explanation">From Last Day</span><br>
+            </div>
+        </div>
+        <div class="vl"></div>
+        <div class="card border-0">
+            <div class="card-body">
+                <span class="explanation">Total Value</span><br>
+                <h2>{{ last.total_value }}</h2>
+                <span class="explanation">From Last Day</span><br>
+            </div>
+        </div>
+        <div class="vl"></div>
+        <div class="card border-0">
+            <div class="card-body">
+                <span class="explanation">Total market capital</span><br>
+                <h2>{{ last.total_market_cap }}</h2>
+                <span class="explanation">From Last Day</span><br>
+            </div>
+        </div>
     </div>
 
+
+    <div class="row" >
+        <div class="col-md-8 "  style="padding:3%;">
+             <canvas id="myChart1" width="850" height="400"></canvas>
+
+
+
+            <div class="dates">
+              <form method="get" action="">
+{#                  {% csrf_token %}#}
+                   <div class="start_date input-group mb-4" style="width: 40%">
+                <input class="form-control start_date" type="text" placeholder="start date" id="startdate_datepicker" name="startdate">
+                <div class="input-group-append">
+                  <span class="fa fa-calendar input-group-text start_date_calendar" aria-hidden="true "></span>
+                </div>
+
+              </div>
+              <div class="end_date input-group mb-4" style="width: 40%">
+                <input class="form-control end_date" type="text" placeholder="end date" id="enddate_datepicker" name="enddate">
+                <div class="input-group-append">
+                  <span class="fa fa-calendar input-group-text end_date_calendar" aria-hidden="true "></span>
+                </div>
+              </div>
+                <button type="submit"  class="btn btn-primary">submit</button>
+
+            </form>
+
+            </div>
+
+
+
+        </div>
+        <div class="col-md-4 ">
+             <div class="w3-card-4" style="padding:1%;height:450px;margin-top: 20px;">
+
+                <header >
+                    <h4 style="padding: 2%"><i>Five suggested companies based on <b>predicted price</b> after seven days(%)</i></h4>
+                </header>
+                <hr>
+
+                <div class="w3-container" style="margin-top: 0px">
+                        <form class="form-inline my-2 my-lg-0" method="get" action="/search_company/">
+                            <input type="hidden" name="search_box" value={{ comp_name.0 }}>
+                            <button class="btn btn-link" type="submit">{{ comp_name.0 }}</button>
+                        </form>
+                        <div class="bar">
+                            <div class="bar-inner" data-percent="{{ percent_change.0 }}" style="width: {{  within_100.0 }}%;" >
+                            </div>
+                        </div>
+                         <form class="form-inline my-2 my-lg-0" method="get" action="/search_company/">
+                            <input type="hidden" name="search_box" value={{ comp_name.1 }}>
+                            <button class="btn btn-link" type="submit">{{ comp_name.1 }}</button>
+                        </form>
+                        <div class="bar">
+                            <div class="bar-inner" data-percent="{{ percent_change.1 }}" style="width: {{  within_100.1 }}%;" >
+                            </div>
+                        </div>
+                        <form class="form-inline my-2 my-lg-0" method="get" action="/search_company/">
+                            <input type="hidden" name="search_box" value={{ comp_name.2 }}>
+                            <button class="btn btn-link" type="submit">{{ comp_name.2 }}</button>
+                        </form>
+                        <div class="bar">
+                            <div class="bar-inner" data-percent="{{ percent_change.2 }}" style="width: {{  within_100.2 }}%;" >
+                            </div>
+                        </div>
+                        <form class="form-inline my-2 my-lg-0" method="get" action="/search_company/">
+                            <input type="hidden" name="search_box" value={{ comp_name.3 }}>
+                            <button class="btn btn-link" type="submit">{{ comp_name.3 }}</button>
+                        </form>
+                        <div class="bar">
+                            <div class="bar-inner" data-percent="{{ percent_change.3 }}" style="width: {{  within_100.3}}%;" >
+                            </div>
+                        </div>
+                       <form class="form-inline my-2 my-lg-0" method="get" action="/search_company/">
+                            <input type="hidden" name="search_box" value={{ comp_name.4 }}>
+                            <button class="btn btn-link" type="submit">{{ comp_name.4 }}</button>
+                        </form>
+                        <div class="bar">
+                            <div class="bar-inner" data-percent="{{ percent_change.4 }}" style="width: {{  within_100.4 }}%;" >
+                            </div>
+                        </div>
+
+
+                </div>
+
+
+             </div>
+        </div>
+    </div>
+
+{#    <div>#}
+{#    {% render_table table %}#}
+{#    </div>#}
+
+    <div style="margin-top: 20px">
+        <table id="myTable" class="table table-striped" >
+        <thead>
+          <tr>
+            <th>Trade code</th>
+            <th>Company name</th>
+{#            <th>{{ pred_date }}</th>#}
+            <th>Authorized capital</th>
+            <th>Paid up capital</th>
+            <th>Outstanding share number</th>
+            <th>Sector</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for c in companies %}
+            <tr>
+            <form class="form-inline my-2 my-lg-0" method="get" action="/search_company/">
+                <td><input type="hidden" name="search_box" value={{ c.trade_code }}>
+                <button class="btn btn-link" type="submit">{{ c.trade_code }}</button></td>
+            </form>
+            <td>{{ c.company_name }}</td>
+{#            <td>{{ future_price|slice:":"}}</td>#}
+            <td>{{ c.authorized_capital }}</td>
+            <td>{{ c.paid_up_capital }}</td>
+            <td>{{ c.outstanding_share_number }}</td>
+            <td>{{ c.sector }}</td>
+          </tr>
+
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
 <script>
-var ctx = document.getElementById('myChart').getContext('2d');
+var ctx = document.getElementById('myChart1').getContext('2d');
 var myChart = new Chart(ctx, {
   type: 'line',
   data: {
@@ -73,17 +253,41 @@ var myChart = new Chart(ctx, {
         'rgba(153, 102, 255, 0.2)',
         'rgba(255, 159, 64, 0.2)'
       ],
-      borderColor: [
-        'rgba(255,99,132,1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)'
-      ],
+      borderColor: [{% for c in colors %} "{{ c }}", {% endfor %}],
       borderWidth: 1
+
     }]
-  }
+
+  },
+options: {
+                responsive: true,
+                maintainAspectRatio: true,
+            }
+
+});
+
+</script>
+<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('#myTable').dataTable();
 });
 </script>
+
+
+<script>
+$("#startdate_datepicker").datepicker({
+    {#minDate: new Date(2003,1,1),#}
+    {#maxDate: new Date(2020, 1, 1),#}
+     dateFormat: 'yy-mm-dd'
+});
+$("#enddate_datepicker").datepicker({
+    {#minDate: new Date(2003,1,1),#}
+    {#maxDate: new Date(2020, 1, 1),#}
+    dateFormat: 'yy-mm-dd'
+
+});
+</script>
+
+
 {% endblock %}

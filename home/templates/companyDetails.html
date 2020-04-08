@@ -9,15 +9,21 @@
 <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
 
+<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+
+
+<link data-require="jqueryui@*" data-semver="1.10.0" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/css/smoothness/jquery-ui-1.10.0.custom.min.css" />
+<script data-require="jqueryui@*" data-semver="1.10.0" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/jquery-ui.js"></script>
+
+
 <link rel="stylesheet" type="text/css" href="{% static 'styleforcompany.css' %}">
 
 <div class="container emp-profile">
-            <form method="post">
                 <div class="row">
                     <div class="col-md-5">
-                        <h3>Share Prediction Graph</h3>
-                    </div>
-                    <div class="col-md-7">
                         <div class="profile-head">
                                     <h5>
                                         {{ company_name }}
@@ -30,17 +36,82 @@
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
-                                </li>
+{#                                <li class="nav-item">#}
+{#                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>#}
+{#                                </li>#}
                             </ul>
                         </div>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>Share Prediction Graph</h3>
+                    </div>
+                    <div class="col-md-2">
+                        <span class="dot" style="background-color: red;border-radius: 50%;height: 15px;width: 15px;display: inline-block;"></span>
+                        <b>History</b><br>
+                        <span class="dot" style="background-color: green;border-radius: 50%;height: 15px;width: 15px;display: inline-block;"></span>
+                        <b>Prediction</b>
                     </div>
 
                 </div>
                 <div class="row">
                     <div class="col-md-5">
-                        <canvas id="myChart" width="500" height="500"></canvas>
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Trade Code</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ company.trade_code }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Company Name</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ company.company_name }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Authorized Capital</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ company.authorized_capital }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Paid Up Capital</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ company.paid_up_capital }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Outstanding Share Number</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ company.outstanding_share_number }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Sector</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ company.sector }}</p>
+                                            </div>
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-7">
+
+                        <canvas id="myChart" width="600" height="400"></canvas>
                         <script>
                         var ctx = document.getElementById('myChart').getContext('2d');
                         var myChart = new Chart(ctx, {
@@ -78,84 +149,92 @@
                                             beginAtZero: false
                                         }
                                     }]
-                                }
+                                },
+                                responsive: true,
+                                maintainAspectRatio: false,
                             }
                         });
                         </script>
 
                     </div>
-                    <div class="col-md-7">
-                        <div class="tab-content profile-tab" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Trade Code</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{ trade_code }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Company Name</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{ company_name }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Authorized Capital</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{ authorized_capital }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Paid Up Capital</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{ paid_up_capital }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Outstanding Share Number</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{ outstanding_share_number }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Sector</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{ sector }}</p>
-                                            </div>
-                                        </div>
-                            </div>
 
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <div>
-                                {%render_table table %}
-                            </div>
+                </div>
+{#                 <div class="col-md-12">#}
+{#                     {%render_table table %}#}
+{#                 </div>#}
+     <div class="dates" style="padding-bottom: 30px;padding-left: 750px">
+              <form method="get" action="">
+{#                  {% csrf_token %}#}
+                   <div class="start_date input-group mb-4" style="width: 70%">
+                <input class="form-control start_date" type="text" placeholder="start date" id="startdate_datepicker" name="startdate">
+                <div class="input-group-append">
+                  <span class="fa fa-calendar input-group-text start_date_calendar" aria-hidden="true "></span>
+                </div>
 
-                            </div>
-                        </div>
-                    </div>
+              </div>
+              <div class="end_date input-group mb-4" style="width: 70%">
+                <input class="form-control end_date" type="text" placeholder="end date" id="enddate_datepicker" name="enddate">
+                <div class="input-group-append">
+                  <span class="fa fa-calendar input-group-text end_date_calendar" aria-hidden="true "></span>
                 </div>
-                <div class="row">
-                    <div>
-                        <label style="padding: 15px"></label>
-                        <span class="dot" style="background-color: red;border-radius: 50%;height: 15px;width: 15px;display: inline-block;"></span>
-                        <b>History</b>
-                        <label style="padding: 15px"></label>
-                        <span class="dot" style="background-color: green;border-radius: 50%;height: 15px;width: 15px;display: inline-block;"></span>
-                        <b>Prediction</b>
-                    </div>
-                </div>
+              </div>
+                <input type="hidden" name="search_box" value={{ code }}>
+                <button type="submit"  class="btn btn-primary">submit</button>
+
             </form>
-        </div>
+
+     </div>
+     <div>
+        <table id="myTable" class="table table-striped" style=" border: 1px solid black;" >
+        <thead>
+          <tr>
+            <th>Trade code</th>
+            <th>Date</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for c in company_pred %}
+            <tr style="color: black;background-color: #befcb8;border: 1px solid black;">
+                <td>{{ c.trade_code}}</td>
+                <td>{{ c.datedate}}</td>
+                <td>{{ c.future_price}}</td>
+
+            </tr>
+
+        {% endfor %}
+        {% for c in company_history %}
+            <tr style="color: black;background-color:#fcbbb8;">
+                <td>{{ c.trade_code}}</td>
+                <td>{{ c.datedate}}</td>
+                <td>{{ c.closing_price}}</td>
+
+            </tr>
+
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+</div>
+
+<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('#myTable').dataTable();
+});
+</script>
+<script>
+$("#startdate_datepicker").datepicker({
+    {#minDate: new Date(2003,1,1),#}
+    {#maxDate: new Date(2020, 1, 1),#}
+     dateFormat: 'yy-mm-dd'
+});
+$("#enddate_datepicker").datepicker({
+    {#minDate: new Date(2003,1,1),#}
+    {#maxDate: new Date(2020, 1, 1),#}
+    dateFormat: 'yy-mm-dd'
+
+});
+</script>
+
 {% endblock %}

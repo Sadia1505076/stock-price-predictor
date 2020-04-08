@@ -5,16 +5,55 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-{#    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">#}
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+{#    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">#}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
-{#    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>#}
-{#    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>#}
     <title>Stock Price Predictor</title>
+<style>
+#dropdown {
+  float: left;
+  overflow: hidden;
+
+}
+
+#dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+#dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+#dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+#dropdown-content a:hover {
+  background-color: #ddd;
+}
+#dropdown:hover #dropdown-content {
+  display: block;
+}
+
+</style>
 </head>
 <body>
 
@@ -27,38 +66,29 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-{#            <li class="nav-item">#}
-{#                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>#}
-{#            </li>#}
+
             <li class="nav-item">
                 <form class="form-inline my-2 my-lg-0" method="get" action="/search_company/">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search_box">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </li>
+
         </ul>
-{#        <ul class="navbar-nav mr-auto">#}
-{#            <li class="nav-item active">#}
-{#                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>#}
-{#            </li>#}
-{#            <li class="nav-item">#}
-{#                <a class="nav-link" href="#">Link</a>#}
-{#            </li>#}
-{#            <li class="nav-item dropdown">#}
-{#                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"#}
-{#                   aria-haspopup="true" aria-expanded="false">#}
-{#                    Dropdown#}
-{#                </a>#}
-{#                <div class="dropdown-menu" aria-labelledby="navbarDropdown">#}
-{#                    <a class="dropdown-item" href="#">Action</a>#}
-{#                    <a class="dropdown-item" href="#">Another action</a>#}
-{#                    <div class="dropdown-divider"></div>#}
-{#                    <a class="dropdown-item" href="#">Something else here</a>#}
-{#                </div>#}
-{#            </li>#}
-{#        </ul>#}
+
+            <div id="dropdown" >
+                <button id="dropbtn">Dhaka Stock Exchange
+                  <i class="fa fa-caret-down"></i>
+                </button>
+                <div id="dropdown-content">
+                  <a href="/home/dropdown/stat">Market Statistics</a>
+                  <a href="/home/dropdown/market_index">Market Index</a>
+{#                  <a href="#">Link 3</a>#}
+                </div>
+            </div>
+
         <span style="color: #f9f9f9;">
-            welcome,{{ username }}!!
+            Welcome, {{ username }}!!
         </span>
         <a class="nav-link" style="color: #228B22" href="/home/profile">Your profile</a>
         <a class="btn btn-success my-2 my-sm-0" style="margin-left: 2%;" href="/logout">Logout</a>
@@ -68,19 +98,19 @@
 {% block content %}
 {% endblock %}
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+{#<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"#}
+{#        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"#}
+{#        crossorigin="anonymous"></script>#}
+{#<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"#}
+{#        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"#}
+{#        crossorigin="anonymous"></script>#}
+{#<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"#}
+{#        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"#}
+{#        crossorigin="anonymous"></script>#}
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+{#<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>#}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+{#<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>#}
 
 </body>
 </html>

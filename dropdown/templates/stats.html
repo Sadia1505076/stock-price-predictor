@@ -1,0 +1,336 @@
+{% extends 'base.html' %}
+{% load render_table from django_tables2 %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+{% load static %}
+<script> console.log("inside my script")</script>
+<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+{#<link rel="stylesheet" type="text/css" href="{% static 'styleforcompany.css' %}">#}
+    <style>
+        .bar{
+            background-color: #f2f2f1;width: 100%;height: 20px;margin-bottom: 10px;
+        }
+        .bar-inner{
+           background-color: #2ecc71;height: 100%;position: relative;
+        }
+        .bar-inner:after{
+            position: absolute;
+            right: 2%;
+            content: attr(data-percent);
+            line-height: 15px;
+            font-size: 13px;
+            color: #fff;
+        }
+        .bar_inner_dec{
+            background-color: #ff8080;height: 100%;position: relative;
+        }
+        .bar_inner_dec:after{
+            position: absolute;
+            right: 2%;
+            content: attr(data-percent);
+            line-height: 15px;
+            font-size: 13px;
+            color: #fff;
+        }
+    </style>
+    <div class="row">
+
+        <div class="w3-card-4" style="padding:1%;height:350px;width:300px;margin-top: 20px;margin-bottom: 20px;margin-left: 300px">
+            <header >
+                <h4 ><i># of companies with increasing<br>or decreasing closing price<br> within <b>30 days</b></i></h4>
+            </header>
+            <hr>
+             <div class="w3-container">
+                 <canvas id="piechart2" width="200" height="200"></canvas>
+             </div>
+
+        </div>
+        <div class="w3-card-4" style="padding:1%;height:350px;width:300px;margin-top: 20px;margin-bottom: 20px;margin-left: 50px">
+            <header >
+                <h4 ><i># of companies with increasing<br>or decreasing closing price<br> from <b>last day</b></i></h4>
+            </header>
+            <hr>
+             <div class="w3-container">
+                 <canvas id="piechart" width="200" height="200"></canvas>
+             </div>
+
+        </div>
+{#        <div class="col-md-8"  style="padding:3%;">#}
+{#            #}
+{#        </div>#}
+    </div>
+    <div class="row" style="margin-bottom: 40px">
+        <div class="col-md-3">
+             <div class="w3-card-4" style="padding:1%;height:450px;margin-top: 20px;">
+
+                <header >
+                    <h4 style="padding: 2%"><i>Top five companies with <b>increasing closing price</b>(%)</i></h4>
+                </header>
+                <hr>
+                <div class="w3-container" style="margin-top: 0px">
+                       <form class="form-inline my-2 my-lg-0" method="get" action="/search_company/">
+                            <input type="hidden" name="search_box" value={{ comp_name.0 }}>
+                            <button class="btn btn-link" type="submit">{{ comp_name.0 }}</button>
+                        </form>
+                        <div class="bar">
+                            <div class="bar-inner" data-percent="{{ percent_change.0 }}" style="width: {{  within_100.0 }}%;" >
+                            </div>
+                        </div>
+                        <form class="form-inline my-2 my-lg-0" method="get" action="/search_company/">
+                            <input type="hidden" name="search_box" value={{ comp_name.1 }}>
+                            <button class="btn btn-link" type="submit">{{ comp_name.1 }}</button>
+                        </form>
+                        <div class="bar">
+                            <div class="bar-inner" data-percent="{{ percent_change.1 }}" style="width: {{  within_100.1 }}%;" >
+                            </div>
+                        </div>
+                        <form class="form-inline my-2 my-lg-0" method="get" action="/search_company/">
+                            <input type="hidden" name="search_box" value={{ comp_name.2 }}>
+                            <button class="btn btn-link" type="submit">{{ comp_name.2 }}</button>
+                        </form>
+                        <div class="bar">
+                            <div class="bar-inner" data-percent="{{ percent_change.2 }}" style="width: {{  within_100.2 }}%;" >
+                            </div>
+                        </div>
+                       <form class="form-inline my-2 my-lg-0" method="get" action="/search_company/">
+                            <input type="hidden" name="search_box" value={{ comp_name.3}}>
+                            <button class="btn btn-link" type="submit">{{ comp_name.3 }}</button>
+                        </form>
+                        <div class="bar">
+                            <div class="bar-inner" data-percent="{{ percent_change.3 }}" style="width: {{  within_100.3}}%;" >
+                            </div>
+                        </div>
+                       <form class="form-inline my-2 my-lg-0" method="get" action="/search_company/">
+                            <input type="hidden" name="search_box" value={{ comp_name.4 }}>
+                            <button class="btn btn-link" type="submit">{{ comp_name.4}}</button>
+                        </form>
+                        <div class="bar">
+                            <div class="bar-inner" data-percent="{{ percent_change.4 }}" style="width: {{  within_100.4 }}%;" >
+                            </div>
+                        </div>
+
+
+                </div>
+
+             </div>
+        </div>
+        <div class="col-md-3">
+             <div class="w3-card-4" style="padding:1%;height:450px;margin-top: 20px;">
+
+                <header >
+                    <h4 style="padding: 2%"><i>Top five companies with <b>decreasing closing price</b>(%)</i></h4>
+                </header>
+                <hr>
+                <div class="w3-container" style="margin-top: 0px">
+                         <form class="form-inline my-2 my-lg-0" method="get" action="/search_company/">
+                            <input type="hidden" name="search_box" value={{ comp_name_dec.0 }}>
+                            <button class="btn btn-link" type="submit">{{ comp_name_dec.0 }}</button>
+                        </form>
+                        <div class="bar">
+                            <div class="bar_inner_dec" data-percent="-{{ percent_change_dec.0 }}" style="width: {{  within_100_dec.0 }}%;" >
+                            </div>
+                        </div>
+                          <form class="form-inline my-2 my-lg-0" method="get" action="/search_company/">
+                            <input type="hidden" name="search_box" value={{ comp_name_dec.1 }}>
+                            <button class="btn btn-link" type="submit">{{ comp_name_dec.1 }}</button>
+                        </form>
+                        <div class="bar">
+                            <div class="bar_inner_dec" data-percent="-{{ percent_change_dec.1 }}" style="width: {{  within_100_dec.1 }}%;" >
+                            </div>
+                        </div>
+                        <form class="form-inline my-2 my-lg-0" method="get" action="/search_company/">
+                            <input type="hidden" name="search_box" value={{ comp_name_dec.2 }}>
+                            <button class="btn btn-link" type="submit">{{ comp_name_dec.2 }}</button>
+                        </form>
+                        <div class="bar">
+                            <div class="bar_inner_dec" data-percent="-{{ percent_change_dec.2 }}" style="width: {{  within_100_dec.2 }}%;" >
+                            </div>
+                        </div>
+                        <form class="form-inline my-2 my-lg-0" method="get" action="/search_company/">
+                            <input type="hidden" name="search_box" value={{ comp_name_dec.3}}>
+                            <button class="btn btn-link" type="submit">{{ comp_name_dec.3 }}</button>
+                        </form>
+                        <div class="bar">
+                            <div class="bar_inner_dec" data-percent="-{{ percent_change_dec.3 }}" style="width: {{  within_100_dec.3}}%;" >
+                            </div>
+                        </div>
+                        <form class="form-inline my-2 my-lg-0" method="get" action="/search_company/">
+                            <input type="hidden" name="search_box" value={{ comp_name_dec.4}}>
+                            <button class="btn btn-link" type="submit">{{ comp_name_dec.4}}</button>
+                        </form>
+                        <div class="bar">
+                            <div class="bar_inner_dec" data-percent="-{{ percent_change_dec.4 }}" style="width: {{  within_100_dec.4 }}%;" >
+                            </div>
+                        </div>
+
+
+                </div>
+
+             </div>
+        </div>
+        <div class="col-md-3">
+             <div class="w3-card-4" style="padding:1%;height:450px;margin-top: 20px;">
+
+                <header >
+                  <h4 style="padding: 2%"><i>Top five <b>Price</b> from last day</i></h4>
+                </header>
+                <hr>
+
+                 <div class="w3-container" style="margin-top: 0px">
+                         <form class="form-inline my-2 my-lg-0" method="get" action="/search_company/">
+                            <input type="hidden" name="search_box" value={{ price_comp.0}}>
+                            <button class="btn btn-link" type="submit">{{ price_comp.0 }}</button>
+                        </form>
+                        <div class="bar">
+                            <div class="bar-inner" data-percent="{{ price.0 }}" style="width: {{ price_percent.0 }}%;" >
+                            </div>
+                        </div>
+                          <form class="form-inline my-2 my-lg-0" method="get" action="/search_company/">
+                            <input type="hidden" name="search_box" value={{ price_comp.1}}>
+                            <button class="btn btn-link" type="submit">{{ price_comp.1 }}</button>
+                        </form>
+                        <div class="bar">
+                            <div class="bar-inner" data-percent="{{ price.1 }}" style="width: {{ price_percent.1 }}%;" >
+                            </div>
+                        </div>
+                        <form class="form-inline my-2 my-lg-0" method="get" action="/search_company/">
+                            <input type="hidden" name="search_box" value={{ price_comp.2}}>
+                            <button class="btn btn-link" type="submit">{{ price_comp.2 }}</button>
+                        </form>
+                        <div class="bar">
+                            <div class="bar-inner" data-percent="{{ price.2 }}" style="width: {{ price_percent.2 }}%;" >
+                            </div>
+                        </div>
+                        <form class="form-inline my-2 my-lg-0" method="get" action="/search_company/">
+                            <input type="hidden" name="search_box" value={{ price_comp.3}}>
+                            <button class="btn btn-link" type="submit">{{ price_comp.3 }}</button>
+                        </form>
+                        <div class="bar">
+                            <div class="bar-inner" data-percent="{{ price.3 }}" style="width: {{ price_percent.3}}%;" >
+                            </div>
+                        </div>
+                        <form class="form-inline my-2 my-lg-0" method="get" action="/search_company/">
+                            <input type="hidden" name="search_box" value={{ price_comp.4}}>
+                            <button class="btn btn-link" type="submit">{{ price_comp.4}}</button>
+                        </form>
+                        <div class="bar">
+                            <div class="bar-inner" data-percent="{{ price.4 }}" style="width: {{ price_percent.4 }}%;" >
+                            </div>
+                        </div>
+
+
+                </div>
+
+             </div>
+        </div>
+        <div class="col-md-3">
+             <div class="w3-card-4" style="padding:1%;height:450px;margin-top: 20px;">
+
+                <header >
+                  <h4 style="padding: 2%"><i>Top five <b>Sell</b> from last day</i></h4>
+                </header>
+                <hr>
+
+                 <div class="w3-container" style="margin-top: 0px">
+                         <form class="form-inline my-2 my-lg-0" method="get" action="/search_company/">
+                            <input type="hidden" name="search_box" value={{ sell_comp.0}}>
+                            <button class="btn btn-link" type="submit">{{ sell_comp.0 }}</button>
+                        </form>
+                        <div class="bar">
+                            <div class="bar-inner" data-percent="{{ sell.0 }}" style="width: {{ sell_percent.0 }}%;" >
+                            </div>
+                        </div>
+                          <form class="form-inline my-2 my-lg-0" method="get" action="/search_company/">
+                            <input type="hidden" name="search_box" value={{ sell_comp.1}}>
+                            <button class="btn btn-link" type="submit">{{ sell_comp.1 }}</button>
+                        </form>
+                        <div class="bar">
+                            <div class="bar-inner" data-percent="{{ sell.1 }}" style="width: {{ sell_percent.1 }}%;" >
+                            </div>
+                        </div>
+                        <form class="form-inline my-2 my-lg-0" method="get" action="/search_company/">
+                            <input type="hidden" name="search_box" value={{ sell_comp.2}}>
+                            <button class="btn btn-link" type="submit">{{ sell_comp.2 }}</button>
+                        </form>
+                        <div class="bar">
+                            <div class="bar-inner" data-percent="{{ sell.2 }}" style="width: {{ sell_percent.2 }}%;" >
+                            </div>
+                        </div>
+                        <form class="form-inline my-2 my-lg-0" method="get" action="/search_company/">
+                            <input type="hidden" name="search_box" value={{ sell_comp.3}}>
+                            <button class="btn btn-link" type="submit">{{ sell_comp.3 }}</button>
+                        </form>
+                        <div class="bar">
+                            <div class="bar-inner" data-percent="{{ sell.3 }}" style="width: {{ sell_percent.3}}%;" >
+                            </div>
+                        </div>
+                        <form class="form-inline my-2 my-lg-0" method="get" action="/search_company/">
+                            <input type="hidden" name="search_box" value={{ sell_comp.4}}>
+                            <button class="btn btn-link" type="submit">{{ sell_comp.4}}</button>
+                        </form>
+                        <div class="bar">
+                            <div class="bar-inner" data-percent="{{ sell.4 }}" style="width: {{ sell_percent.4 }}%;" >
+                            </div>
+                        </div>
+
+
+                </div>
+
+             </div>
+        </div>
+    </div>
+
+
+<script>
+    var ctx = document.getElementById('piechart').getContext('2d');
+    var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+    datasets: [{
+        data: [{{ num_inc_thirty }},{{ num_dec_thirty }}],
+        backgroundColor: [
+        '#db4dff',
+        '#ffa64d',
+      ],
+    }],
+
+    // These labels appear in the legend and in the tooltips when hovering different arcs
+    labels: [
+        'increasing',
+        'decreasing',
+    ]},
+    options:{
+        responsive: false
+    }
+});
+</script>
+<script>
+    var ctx = document.getElementById('piechart2').getContext('2d');
+    var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+    datasets: [{
+        data: [{{ num_inc_last }},{{ num_dec_last }}],
+        backgroundColor: [
+        '#db4dff',
+        '#ffa64d',
+      ],
+    }],
+
+    // These labels appear in the legend and in the tooltips when hovering different arcs
+    labels: [
+        'increasing',
+        'decreasing',
+    ]},
+    options:{
+        responsive: false
+    }
+});
+</script>
+{% endblock %}

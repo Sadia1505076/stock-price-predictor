@@ -2,13 +2,17 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
+from django.db.models.expressions import RawSQL
 from django.shortcuts import redirect, render, get_object_or_404
 from django_tables2 import RequestConfig
+from django.http import HttpResponseRedirect
+from docutils.nodes import entry
 
 from login.models import User
 from .forms import EditProfileForm
-from .models import Company, DSEHistory, ShareHistory, SharePrediction
-from .tables import CompanyTable, ShareHistoryTable, SharePredictionTable
+from .models import Company, DSEHistory, ShareHistory, SharePrediction, DSEPrediction
+from .tables import CompanyTable
+import numpy as np
 
 
 @login_required()
@@ -30,62 +34,89 @@ def change_password(request):
 
 
 @login_required()
-def home_view(request):
+def home_view(request, *args, **kwargs):
     username = None
     table = None
     dates = []
-    diff = []
-
-    datesc = []
-    pricec = []
-
     dsex_index = []
+    point_color = []
+    bg_color = []
+    company_names = []
+    percent_change = []
+    percent_change_within_100 = []
+    all_histories = None
+    dse_pred = None
+
+    start_date = request.GET.get('startdate')
+    end_date = request.GET.get('enddate')
+    # print(start_end_date[0])
+
     if request.user.is_authenticated:
         username = request.user.username
-        table = CompanyTable(Company.objects.all())
-        RequestConfig(request, paginate={'per_page': 15}).configure(table)
+        # table = CompanyTable(Company.objects.all())
+        # RequestConfig(request, paginate={'per_page': 15}).configure(table)
 
-        all_histories = DSEHistory.objects.raw('SELECT * FROM HOME_DSEHISTORY ORDER BY date DESC LIMIT 100')
+        if start_date is not None and end_date is not None:
+            print("inside not none")
+            print(start_date)
+            all_histories = DSEHistory.objects.raw(
+                'SELECT * FROM HOME_DSEHISTORY where date  between %s and %s  ORDER BY date DESC',
+                [start_date, end_date])
 
-        all_companies1 = ShareHistory.objects.raw(
-            'SELECT * from HOME_SHAREHISTORY WHERE DATE(date) = \'2019-08-01\' order by date DESC')
+            min_pred_query = DSEPrediction.objects.raw(
+                'Select * from HOME_DSEPREDICTION where date = ( select min(date) from HOME_DSEPREDICTION  )')
+            for d in min_pred_query:
+                min_pred = d.date
+            dse_pred = DSEPrediction.objects.raw(
+                'SELECT * FROM HOME_DSEPREDICTION where date  between %s and %s ORDER BY date ASC',
+                [min_pred, end_date])
 
-        all_companies2 = ShareHistory.objects.raw(
-            'SELECT * from HOME_SHAREHISTORY WHERE DATE(date) = \'2019-09-01\' order by date DESC')
-
-        for p1 in all_companies1:
-            for p2 in all_companies2:
-                if p1.trade_code == p2.trade_code:
-                    temp = []
-                    temp.append(abs(p1.closing_price-p2.closing_price)/p1.closing_price*100)
-                    temp.append(p1.trade_code)
-                    diff.append(temp)
-
-        # diff.sort()
-        # count = 1
-        for d in diff:
-            print(d)
-        # for i in range(11):
-        #     for j in range(11):
-        #         if diff[i].temp[0]> diff[j].temp[0]:
+        else:
+            print("inside none")
+            all_histories = DSEHistory.objects.raw('SELECT * FROM HOME_DSEHISTORY ORDER BY date DESC LIMIT 50')
+            dse_pred = DSEPrediction.objects.raw(
+                'SELECT * FROM HOME_DSEPREDICTION ORDER BY date ASC')
 
         for p in reversed(all_histories):
-            # print(p.date)
+            point_color.append('red')
+            bg_color.append('255, 99, 132, 0.2')
             dates.append(p.date.date())
             dsex_index.append(p.dsex_index)
-    all = ShareHistory.objects.raw(
-            'SELECT * from HOME_SHAREHISTORY WHERE trade_code = \'ADVENT\' and DATE(date) between \'2019-08-01\' and \'2019-09-01\'')
+        for p in dse_pred:
+            dates.append(p.date.date())
+            dsex_index.append(p.future_index)
+            point_color.append('green')
+            bg_color.append('54, 162, 235, 0.2')
 
-    for p in all:
-        datesc.append(p.date)
-        pricec.append(p.closing_price)
+        last_week_dse = DSEHistory.objects.raw(
+            'Select * from HOME_DSEHISTORY where date = ( select max(date) from HOME_DSEHISTORY  )')
+        for i in last_week_dse:
+            last = i
+
+        all_companies = Company.objects.all()
+
+        pred_arr_from_file = np.load('predArr.npy')
+        for x in range(0, pred_arr_from_file.shape[0]):
+            company_names.append(pred_arr_from_file[x, 0])
+            percent_change.append(round(float(pred_arr_from_file[x, 3]), 2))
+            if float(pred_arr_from_file[x, 3]) > 100:
+                percent_change_within_100.append('100')
+            else:
+                percent_change_within_100.append(round(float(pred_arr_from_file[x, 3]), 2))
+
     context = {
         'username': username,
         'table': table,
         'dates': dates,
         'indices': dsex_index,
-        'datec': datesc,
-        'price': pricec,
+        'last': last,
+        'companies': all_companies,
+        'comp_name': company_names,
+        'percent_change': percent_change,
+        'within_100': percent_change_within_100,
+        'colors': point_color,
+        'bgcolor': bg_color,
+
     }
     return render(request, 'Home.html', context)
 
@@ -143,120 +174,72 @@ def company_details_view(request, *args, **kwargs):
     point_color = []
     bg_color = []
     code = kwargs.get("trade_code")
+
     if request.method == 'GET' and code is None:
+        start_date = request.GET.get('startdate')
+        end_date = request.GET.get('enddate')
         print("inside get")
+        print(start_date)
         search_query = request.GET.get('search_box', None)
 
         code = search_query.upper()
 
         company = Company.objects.raw('SELECT * FROM HOME_COMPANY WHERE TRADE_CODE = %s', [code])
 
-        all_histories = SharePrediction.objects.raw(
-            'SELECT * FROM HOME_SHAREPREDICTION  WHERE TRADE_CODE = %s ORDER BY date ASC', [code])
+        if start_date is not None and end_date is not None:
+            company_history = ShareHistory.objects.raw(
+                'SELECT id, trade_code, convert(date,date) as datedate, opening_price, max_price, min_price, closing_price, total_volume FROM HOME_SHAREHISTORY WHERE TRADE_CODE = %s and date between %s and %s ORDER BY date DESC',
+                [code, start_date, end_date])
 
-        # share_history = ShareHistory.objects.raw(
-        #     'SELECT * FROM HOME_SHAREHISTORY ORDER BY date ASC')
+            min_pred_query = SharePrediction.objects.raw(
+                'Select * from HOME_SHAREPREDICTION where date = ( select min(date) from HOME_SHAREPREDICTION  )')
+            for d in min_pred_query:
+                min_pred = d.date
 
-        count = 1
-        for p in all_histories:
-            if count <= 30:
-                point_color.append('red')
-                bg_color.append('255, 99, 132, 0.2')
-            else:
-                point_color.append('green')
-                bg_color.append('54, 162, 235, 0.2')
+            company_pred = SharePrediction.objects.raw(
+                'SELECT id, trade_code, convert(date, date) as datedate, future_price FROM HOME_SHAREPREDICTION  WHERE TRADE_CODE = %s  and date between %s and %s ORDER BY date DESC ',
+                [code, min_pred, end_date])
+
+        else:
+            company_pred = SharePrediction.objects.raw(
+                'SELECT id, trade_code, convert(date, date) as datedate, future_price FROM HOME_SHAREPREDICTION  WHERE TRADE_CODE = %s ORDER BY date DESC ',
+                [code])
+
+            company_history = ShareHistory.objects.raw(
+                'SELECT id, trade_code, convert(date,date) as datedate, opening_price, max_price, min_price, closing_price, total_volume FROM HOME_SHAREHISTORY WHERE TRADE_CODE = %s ORDER BY date DESC limit 30',
+                [code])
+
+        for p in reversed(company_history):
+            point_color.append('red')
+            bg_color.append('255, 99, 132, 0.2')
+            dates.append(p.date.date())
+            price.append(p.closing_price)
+
+        for p in reversed(company_pred):
             dates.append(p.date.date())
             price.append(p.future_price)
-            count = count+1
+            point_color.append('green')
+            bg_color.append('54, 162, 235, 0.2')
 
-        #
-        # for p in share_history:
-        #     dates.append(p.date)
-        #     price.append(p.closing_price)
-        #     color.append('green')
-
-        table = SharePredictionTable(all_histories)
-        RequestConfig(request, paginate={'per_page': 5}).configure(table)
         if company:
             for c in company:
-                cname = c.company_name
-                acapital = c.authorized_capital
-                pcapital = c.paid_up_capital
-                snumber = c.outstanding_share_number
-                sector = c.sector
+                company = c
             context = {
                 'username': request.user.username,
-                'trade_code': code,
-                'company_name': cname,
-                'authorized_capital': acapital,
-                'paid_up_capital': pcapital,
-                'outstanding_share_number': snumber,
-                'sector': sector,
                 'dates': dates,
                 'prices': price,
-                'table': table,
                 'colors': point_color,
                 'bgcolor': bg_color,
+                'company': company,
+                'company_pred': company_pred,
+                'company_history': company_history,
+                'code': code,
 
             }
             return render(request, 'companyDetails.html', context)
         else:
             return render(request, '404_not_found.html')
-    else:
-        print("inside k")
-
-        company = Company.objects.raw('SELECT * FROM HOME_COMPANY WHERE TRADE_CODE = %s', [code])
-
-        all_histories = ShareHistory.objects.raw(
-            'SELECT * FROM HOME_SHAREPREDICTION  WHERE TRADE_CODE = %s ORDER BY date ASC', [code])
-
-        # share_history = ShareHistory.objects.raw(
-        #     'SELECT * FROM HOME_SHAREHISTORY ORDER BY date ASC')
-
-        count = 1
-        for p in all_histories:
-            if count <= 30:
-                point_color.append('red')
-                bg_color.append('255, 99, 132, 0.2')
-            else:
-                point_color.append('green')
-                bg_color.append('54, 162, 235, 0.2')
-            dates.append(p.date.date())
-            price.append(p.future_price)
-            count = count + 1
-
-        # for p in share_history:
-        #     dates.append(p.date)
-        #     price.append(p.closing_price)
-        #     color.append('green')
-
-        table = SharePredictionTable(all_histories)
-        RequestConfig(request, paginate={'per_page': 5}).configure(table)
-
-        for c in company:
-            cname = c.company_name
-            acapital = c.authorized_capital
-            pcapital = c.paid_up_capital
-            snumber = c.outstanding_share_number
-            sector = c.sector
-        context = {
-            'username': request.user.username,
-            'trade_code': code,
-            'company_name': cname,
-            'authorized_capital': acapital,
-            'paid_up_capital': pcapital,
-            'outstanding_share_number': snumber,
-            'sector': sector,
-            'dates': dates,
-            'prices': price,
-            'table': table,
-            'colors': point_color,
-            'bgcolor': bg_color,
-
-        }
-        return render(request, 'companyDetails.html', context)
 
 
 def not_found(request):
     return render(request, '404_not_found.html')
-

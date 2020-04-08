@@ -39,6 +39,7 @@ INSTALLED_APPS = [
 
     'home.apps.HomeConfig',
     'login.apps.LoginConfig',
+    'dropdown.apps.DropdownConfig',
 
     'widget_tweaks',
     'django_tables2',
@@ -87,8 +88,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'NAME': 'stock_price_prediction',
-        'USER': 'newuser',
-        'PASSWORD': 'newuserS201505076;',
+        'USER': 'root',
+        'PASSWORD': '1505076',
         'HOST': 'localhost',
         'PORT': '3306',
 

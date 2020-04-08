@@ -28,4 +28,5 @@ urlpatterns = [
     url(r'^login/$', auth_views.LoginView.as_view(redirect_authenticated_user=True, template_name="login.html"), name="login"),
     path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),
     path('search_company/', views.company_details_view),
+    url(r'^home/dropdown/', include('dropdown.urls')),
 ]
